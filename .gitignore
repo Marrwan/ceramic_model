@@ -1,0 +1,10 @@
+./dist
+./node_modules
+command-worker.js
+index.html
+index.js
+main.html
+main.js
+my-first-composite.json
+tes.js
+webpack.config.js

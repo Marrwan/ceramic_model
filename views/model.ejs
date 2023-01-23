@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Model Discovery</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <% let models = arr %>
+  
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#model-list {
+  margin: 20px;
+}
+
+#models {
+  list-style-type: none;
+}
+
+.model {
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.model:hover {
+  background-color: #e6e6e6;
+}
+
+#model-details {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  display: none;
+}
+
+#model-details h2 {
+  margin: 0;
+}
+
+#model-details p {
+  margin: 10px 0;
+}
+
+  </style>
+
+  <script>
+    // Get a reference to the model list and details container
+const modelList = document.getElementById("models");
+const modelDetails = document.getElementById("model-details");
+
+// Get the data models from the Ceramic network or ComposeDB
+// and add them to the model list
+async function getModels() {
+  try {
+  console.log({models});
+    models.forEach(model => {
+      const li = document.createElement("li");
+      li.innerHTML = model.name;
+      li.classList.add("model");
+      li.setAttribute("data-model-cid", model.cid);
+      modelList.appendChild(li);
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Add click event listener to the model list
+modelList.addEventListener("click", (e) => {
+  if (e.target.classList.contains("model")) {
+    const cid = e.target.getAttribute("data-model-cid");
+    getModelDetails(cid);
+  }
+});
+
+// Get detailed information about the selected model
+// and display it in the model details container
+async function getModelDetails(cid) {
+  try {
+    const response = await axios.get(`https://example.com/models/${cid}`);
+    const model = response.data;
+    modelDetails.innerHTML = `
+      <h2>${model.name}</h2>
+      <p>${model.description}</p>
+      <p>CID: ${model.cid}</p>
+    `;
+    modelDetails.style.display = "block";
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Call the getModels function to get the data models
+getModels();
+
+  </script>
+</head>
+<body>
+
+  <h1>Data Model Discovery</h1>
+  <div id="model-list">
+   <ul id="models">
+     <!-- data models will be added dynamically here -->
+     <% models.forEach(model=>{%>
+      <li class="model">
+      <a class="model" href="/<%=model.id%>" data-model-id="<%=model.id%>"><%=model.name%></a>
+    </li>
+    <%}) %> 
+   </ul>
+  </div>
+  <div id="model-details"></div>
+</body>
+</html>
