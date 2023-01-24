@@ -10,6 +10,12 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
+    execSync('npm install -g @ceramicnetwork/cli');
+    execSync('export CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB="true"')
+    execSync('npm install -g @composedb/cli@^0.3.0');
+    let key = execSync('composedb did:generate-private-key').toString();
+    console.log({key})
+    execSync(`composedb did:from-private-key ${key}`)
     const command = 'composedb model:list';
     const result = execSync(command, {
         input: '\n',  // press 'Enter' key
@@ -36,7 +42,8 @@ return res.render('model', { arr: arr });
 
 }) 
 
-app.get('/:id', (req, res) => {
+app.get('/:id', async(req, res) => {
+    
     const {id} = req.params;
     const command = `composedb composite:from-model ${id} --ceramic-url=https://gateway-clay.ceramic.network`;
     const result = execSync(command).toString();
@@ -48,6 +55,7 @@ app.get('/:id', (req, res) => {
 });
 
 app.get('/command', (req, res) => {
+    
     const command = 'composedb model:list';
     exec(command,  (error, stdout, stderr) => {
         if (error) {
