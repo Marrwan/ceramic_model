@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     // execSync(`composedb did:from-private-key ${key}`)
     const command = 'composedb model:list';
     const result = execSync(command).toString();
-   
+   return res.send(result);
 // console the type of resl
 let arr = []
 let jsonArray = result.split("\n");
