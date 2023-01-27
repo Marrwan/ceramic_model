@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
     // let key = execSync('composedb did:generate-private-key').toString();
     // console.log({key})
     // execSync(`composedb did:from-private-key ${key}`)
-    const command = 'composedb model:list';
+    const command = 'npx composedb model:list';
     // check if the command is working or not
     const result = execSync(command).toString();
    return res.send(result);
@@ -42,7 +42,7 @@ return res.render('model', { arr: arr });
 app.get('/:id', async(req, res) => {
     
     const {id} = req.params;
-    const command = `composedb composite:from-model ${id} --ceramic-url=https://gateway-clay.ceramic.network`;
+    const command = `npx composedb composite:from-model ${id} --ceramic-url=https://gateway-clay.ceramic.network`;
     const result = execSync(command).toString();
     let arr = []
     let jsonArray = result.split("\n");
