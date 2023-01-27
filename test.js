@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
     const command = 'npx composedb model:list';
     // check if the command is working or not
     const result = execSync(command).toString();
-   return res.send(result);
+ 
 // console the type of resl
 let arr = []
 let jsonArray = result.split("\n");
