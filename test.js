@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
     // console.log({key})
     // execSync(`composedb did:from-private-key ${key}`)
     const command = 'composedb model:list';
+    // check if the command is working or not
     const result = execSync(command).toString();
    return res.send(result);
 // console the type of resl
@@ -68,5 +69,5 @@ app.get('/command', (req, res) => {
 });
 
 app.listen(process.env.PORT || 3000, () => {
-    console.log('Server running on port 3000');
+    console.log(`Server running on  port ${process.env.PORT || 3000}`);
 });
