@@ -23,7 +23,6 @@ let arr = []
 let jsonArray = result.split("\n");
 // return res.json(jsonArray)
 jsonArray.splice(-2,2)
-return res.send(jsonArray);
 jsonArray.forEach(jsonString => {
     let parsedData =JSON.parse(jsonString);
 
