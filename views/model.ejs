@@ -63,6 +63,7 @@ h1 {
   <div id="model-list">
    <ul id="models">
      <!-- data models will be added dynamically here -->
+     <% console.log(models) %>
      <% models.forEach(model=>{%>
       <li class="model">
       <a class="model" href="/<%=model.id%>" data-model-id="<%=model.id%>"><%=model.name%></a>
