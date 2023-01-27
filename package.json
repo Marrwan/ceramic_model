@@ -7,7 +7,7 @@
     "bef" : "npm install @ceramicnetwork/cli && export CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' && npm install @composedb/cli@^0.3.0",
     "test": "",
     "start": "npm run bef && node ./test.js",
-    "dev": "npm run bef && node --watch ./test.js"
+    "dev": " node --watch ./test.js"
   },
   "keywords": [],
   "author": "",

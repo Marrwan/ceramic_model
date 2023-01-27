@@ -10,17 +10,12 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    execSync('npm install -g @ceramicnetwork/cli');
-    execSync('export CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB="true"')
-    execSync('npm install -g @composedb/cli@^0.3.0');
-    let key = execSync('composedb did:generate-private-key').toString();
-    console.log({key})
-    execSync(`composedb did:from-private-key ${key}`)
+    // execSync('export CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB="true"')
+    // let key = execSync('composedb did:generate-private-key').toString();
+    // console.log({key})
+    // execSync(`composedb did:from-private-key ${key}`)
     const command = 'composedb model:list';
-    const result = execSync(command, {
-        input: '\n',  // press 'Enter' key
-        stdio: [ 'pipe', 'pipe', 'pipe' ]
-      }).toString();
+    const result = execSync(command).toString();
    
 // console the type of resl
 let arr = []
