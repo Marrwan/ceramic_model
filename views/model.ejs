@@ -55,57 +55,7 @@ h1 {
 
   </style>
 
-  <script>
-    // Get a reference to the model list and details container
-const modelList = document.getElementById("models");
-const modelDetails = document.getElementById("model-details");
-
-// Get the data models from the Ceramic network or ComposeDB
-// and add them to the model list
-async function getModels() {
-  try {
-  console.log({models});
-    models.forEach(model => {
-      const li = document.createElement("li");
-      li.innerHTML = model.name;
-      li.classList.add("model");
-      li.setAttribute("data-model-cid", model.cid);
-      modelList.appendChild(li);
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Add click event listener to the model list
-modelList.addEventListener("click", (e) => {
-  if (e.target.classList.contains("model")) {
-    const cid = e.target.getAttribute("data-model-cid");
-    getModelDetails(cid);
-  }
-});
-
-// Get detailed information about the selected model
-// and display it in the model details container
-async function getModelDetails(cid) {
-  try {
-    const response = await axios.get(`https://example.com/models/${cid}`);
-    const model = response.data;
-    modelDetails.innerHTML = `
-      <h2>${model.name}</h2>
-      <p>${model.description}</p>
-      <p>CID: ${model.cid}</p>
-    `;
-    modelDetails.style.display = "block";
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Call the getModels function to get the data models
-getModels();
-
-  </script>
+  
 </head>
 <body>
 
