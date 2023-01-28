@@ -1,5 +1,13 @@
-const express = require('express');
-const { exec, execSync, execFile, spawn } = require('child_process');
+// const express = require('express');
+import express from 'express';
+
+// const { exec, execSync } = require('child_process');
+import {exec, execSync} from 'child_process';
+import { CeramicClient } from '@ceramicnetwork/http-client'
+import { Composite } from '@composedb/devtools'
+import { writeEncodedComposite } from '@composedb/devtools-node'
+
+const ceramic = new CeramicClient('https://gateway-clay.ceramic.network');
 
 
 const app = express();
@@ -39,8 +47,14 @@ return res.render('model', { arr: arr });
 }) 
 
 app.get('/:id', async(req, res) => {
-    
+    // 'kjzl6hvfrbw6ca7nidsnrv78x7r4xt0xki71nvwe4j5a3s9wgou8yu3aj8cz38e'
     const {id} = req.params;
+    const composite = await Composite.fromModels({
+        ceramic,
+        models: [`${id}`],
+      })
+
+      return res.json(composite);
     const command = `npx composedb composite:from-model ${id} --ceramic-url=https://gateway-clay.ceramic.network`;
     const result = execSync(command).toString();
     let arr = []
