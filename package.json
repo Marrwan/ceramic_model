@@ -4,7 +4,7 @@
   "description": "",
   "main": "test.mjs",
   "scripts": {
-    "bef": "npm install @ceramicnetwork/cli && export CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' && npm install @composedb/cli@^0.3.0",
+    "bef": "npm install -g @ceramicnetwork/cli && export CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' && npm install -g @composedb/cli@^0.3.0",
     "test": "",
     "start": "npm run bef && node ./test.mjs",
     "dev": " node --watch ./test.mjs"
