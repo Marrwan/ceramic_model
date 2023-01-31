@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
     // let key = execSync('composedb did:generate-private-key').toString();
     // console.log({key})
     // execSync(`composedb did:from-private-key ${key}`)
-    const command = 'npx composedb model:list';
+    const command = 'composedb model:list';
     // check if the command is working or not
     const result = execSync(command).toString();
  
