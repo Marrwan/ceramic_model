@@ -22,7 +22,7 @@ app.get('/', (req, res) => {
     // let key = execSync('composedb did:generate-private-key').toString();
     // console.log({key})
     // execSync(`composedb did:from-private-key ${key}`)
-    const command = 'composedb model:list';
+    const command = 'npx composedb model:list';
     // check if the command is working or not
     const result = execSync(command).toString();
  
@@ -35,7 +35,7 @@ jsonArray.forEach(jsonString => {
     let parsedData =JSON.parse(jsonString);
 
     arr.push(parsedData)
-    console.log({parsedData});
+    // console.log({parsedData});
 });
 // let parsedDatas =JSON.stringify(resl);
 // console.log(typeof(parsedDatas),{parsedDatas});
@@ -45,8 +45,24 @@ return res.render('model', { arr: arr });
 
 
 }) 
+app.get('/command', (req, res) => {
+    
+    const command = 'npx composedb model:list';
+    exec(command,  (error, stdout, stderr) => {
+        if (error) {
+            if(error.code === 'ETIMEDOUT') {
+                console.log('Command timed out');
+            }
 
-app.get('/:id', async(req, res) => {
+            console.error(`exec error: ${error}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+        res.json({ output: stdout });
+    });
+});
+
+app.get('/model/:id', async(req, res) => {
     // 'kjzl6hvfrbw6ca7nidsnrv78x7r4xt0xki71nvwe4j5a3s9wgou8yu3aj8cz38e'
     const {id} = req.params;
     const composite = await Composite.fromModels({
@@ -64,22 +80,7 @@ app.get('/:id', async(req, res) => {
    return res.json(JSON.parse(jsonArray[0]))
 });
 
-app.get('/command', (req, res) => {
-    
-    const command = 'composedb model:list';
-    exec(command,  (error, stdout, stderr) => {
-        if (error) {
-            if(error.code === 'ETIMEDOUT') {
-                console.log('Command timed out');
-            }
 
-            console.error(`exec error: ${error}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
-        res.json({ output: stdout });
-    });
-});
 
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server running on  port ${process.env.PORT || 3000}`);

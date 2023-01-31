@@ -7,7 +7,8 @@
     "bef": "npm install @ceramicnetwork/cli && export CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' && npm install @composedb/cli@^0.3.0",
     "test": "",
     "start": "npm run bef && node ./test.mjs",
-    "dev": " node --watch ./test.mjs"
+    "dev": " node --watch ./test.mjs",
+    "prod" : "pm2 start ./test.mjs "
   },
   "keywords": [],
   "author": "",
@@ -23,6 +24,9 @@
     "key-did-resolver": "^2.3.0",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1"
+  },
+  "node-engine": {
+    "node": "16.18.1"
   },
   "dependencies": {
     "@ceramicnetwork/blockchain-utils-linking": "^2.8.0",
