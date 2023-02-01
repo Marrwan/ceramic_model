@@ -8,7 +8,7 @@
     "test": "",
     "start": "npm run bef && node ./test.mjs",
     "dev": " node --watch ./test.mjs",
-    "prod" : "pm2 start ./test.mjs "
+    "prod": "pm2 start ./test.mjs "
   },
   "keywords": [],
   "author": "",
