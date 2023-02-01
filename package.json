@@ -6,7 +6,7 @@
   "scripts": {
     "bef": "npm install @ceramicnetwork/cli && export CERAMIC_ENABLE_EXPERIMENTAL_COMPOSE_DB='true' && npm install @composedb/cli@^0.3.0",
     "test": "",
-    "start": "npm run bef && node ./test.mjs",
+    "start": "npm run bef && npm run prod",
     "dev": " node --watch ./test.mjs",
     "prod" : "pm2 start ./test.mjs "
   },
@@ -25,7 +25,7 @@
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.1"
   },
-  "node-engine": {
+  "engines": {
     "node": "16.18.1"
   },
   "dependencies": {
